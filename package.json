@@ -6,8 +6,11 @@
   "scripts": {
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'",
-    "start": "node server.js",
+    "start": "node server/server.js",
     "nodemon": "nodemon server/server.js -e js,hbs"
+  },
+  "engines": {
+    "node": "8.9.4"
   },
   "keywords": [],
   "author": "",

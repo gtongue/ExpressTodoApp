@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const { ObjectID } = require("mongodb");
 let { mongoose } = require('./db/mongoose');
 let { Todo } = require("./models/todo");
 let { User } = require("./models/user");
@@ -27,20 +27,23 @@ app.get('/todos', (req, res) => {
 });
 
 app.get('/todos/:id', (req, res) => {
+    if(!ObjectID.isValid(req.params.id))
+        return res.status(404).send("Invalid object id");
+
     Todo.findById(req.params.id).then((todo) => {
         if(todo){
             res.send({todo});
         }else{
-            res.status(400);
+            res.status(404);
             res.send("User does not exist in the database");
         }
     }, (err) => {
-        res.status(400);
+        res.status(404);
         res.send(err.message);
     });
 });
 
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(3000, () => console.log(`Server started on port ${port}`));
 
 module.exports  = {app};
