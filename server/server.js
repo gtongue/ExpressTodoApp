@@ -26,6 +26,20 @@ app.get('/todos', (req, res) => {
     });
 });
 
+app.get('/todos/:id', (req, res) => {
+    Todo.findById(req.params.id).then((todo) => {
+        if(todo){
+            res.send({todo});
+        }else{
+            res.status(400);
+            res.send("User does not exist in the database");
+        }
+    }, (err) => {
+        res.status(400);
+        res.send(err.message);
+    });
+});
+
 let port = process.env.PORT || 3000;
 app.listen(3000, () => console.log(`Server started on port ${port}`));
 
