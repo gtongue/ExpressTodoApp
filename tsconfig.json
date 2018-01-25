@@ -2,12 +2,24 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "outDir": "./build"
+    "moduleResolution": "node",
+    "jsx": "react",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "types": [
+      "node"
+    ]
   },
-  "include": [
-    "./src"
-  ],
+  // "include": [
+  //   "sr"
+  // ],
   "exclude": [
     "node_modules"
+  ],
+  "filesGlob": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ]
 }

@@ -7,7 +7,8 @@ var userSchema = new mongoose_1.Schema({
         required: true,
         minlength: 1,
         trim: true,
-        unique: true
-    }
+        unique: true,
+    },
 });
-exports.default = mongoose_1.model('User', userSchema);
+exports.default = mongoose_1.model("User", userSchema);
+//# sourceMappingURL=user.js.map

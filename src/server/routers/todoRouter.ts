@@ -1,12 +1,12 @@
-import {Router, Request, Response, NextFunction} from 'express';
-import {ObjectID} from 'mongodb';
-import Todo from '../models/todo';
+import {Router, Request, Response, NextFunction} from "express";
+import {ObjectID} from "mongodb";
+import Todo from "../models/todo";
 
 class TodoRouter {
 
-  router: Router;
+  public router: Router;
 
-  constructor(){
+  constructor() {
     this.router = Router();
     this.routes();
   }
@@ -21,13 +21,13 @@ class TodoRouter {
   }
 
   public GetTodo(req: Request, res: Response): void {
-    if(!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id)) {
       res.status(404).send("Invalid object id");
-    else{
+    } else {
       Todo.findById(req.params.id).then((todo) => {
-        if(todo){
+        if (todo) {
             res.send({todo});
-        }else{
+        } else {
             res.status(404);
             res.send("Todo does not exist in the database");
         }
@@ -39,26 +39,27 @@ class TodoRouter {
   }
 
   public CreateTodo(req: Request, res: Response): void {
-    let todo = new Todo(req.body);
-    todo.save().then((doc) => res.send(doc),(err) => {
+    const todo = new Todo(req.body);
+    todo.save().then((doc) => res.send(doc), (err) => {
       res.statusCode = 400;
       res.send(err.message);
     });
   }
 
   public UpdateTodo(req: Request, res: Response): void {
-
+    // TODO
   }
+
   public DeleteTodo(req: Request, res: Response): void {
-    if(!ObjectID.isValid(req.params.id))
+    if (!ObjectID.isValid(req.params.id)) {
       res.status(404).send("Invalid object id");
-    else{
+    } else {
       Todo.findByIdAndRemove(req.params.id).then((todo) => {
-        if(todo){
+        if (todo) {
           res.send({todo});
-        }else{
+        } else {
           res.status(404);
-          res.send("No todo found with that id")
+          res.send("No todo found with that id");
         }
       }).catch((err) => {
         res.status(400);
@@ -67,7 +68,7 @@ class TodoRouter {
     }
   }
 
-  routes(){
+  private routes(): void {
     this.router.get("/", this.GetTodos);
     this.router.get("/:id", this.GetTodo);
     this.router.post("/", this.CreateTodo);

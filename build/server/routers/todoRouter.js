@@ -17,8 +17,9 @@ var TodoRouter = /** @class */ (function () {
         });
     };
     TodoRouter.prototype.GetTodo = function (req, res) {
-        if (!mongodb_1.ObjectID.isValid(req.params.id))
+        if (!mongodb_1.ObjectID.isValid(req.params.id)) {
             res.status(404).send("Invalid object id");
+        }
         else {
             todo_1.default.findById(req.params.id).then(function (todo) {
                 if (todo) {
@@ -42,10 +43,12 @@ var TodoRouter = /** @class */ (function () {
         });
     };
     TodoRouter.prototype.UpdateTodo = function (req, res) {
+        // TODO
     };
     TodoRouter.prototype.DeleteTodo = function (req, res) {
-        if (!mongodb_1.ObjectID.isValid(req.params.id))
+        if (!mongodb_1.ObjectID.isValid(req.params.id)) {
             res.status(404).send("Invalid object id");
+        }
         else {
             todo_1.default.findByIdAndRemove(req.params.id).then(function (todo) {
                 if (todo) {
@@ -70,3 +73,4 @@ var TodoRouter = /** @class */ (function () {
     return TodoRouter;
 }());
 exports.default = new TodoRouter().router;
+//# sourceMappingURL=todoRouter.js.map

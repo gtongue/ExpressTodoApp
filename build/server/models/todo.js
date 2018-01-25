@@ -6,15 +6,16 @@ var todoSchema = new mongoose_1.Schema({
         type: String,
         required: true,
         minlength: 1,
-        trim: true
+        trim: true,
     },
     completed: {
         type: Boolean,
-        default: false
+        default: false,
     },
     completedAt: {
         type: Number,
-        default: null
-    }
+        default: null,
+    },
 });
-exports.default = mongoose_1.model('Todo', todoSchema);
+exports.default = mongoose_1.model("Todo", todoSchema);
+//# sourceMappingURL=todo.js.map
