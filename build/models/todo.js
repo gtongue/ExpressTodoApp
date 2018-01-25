@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-
-let Todo = mongoose.model("Todo", {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose_1 = require("mongoose");
+var todoSchema = new mongoose_1.Schema({
     text: {
         type: String,
         required: true,
@@ -16,5 +17,4 @@ let Todo = mongoose.model("Todo", {
         default: null
     }
 });
-
-module.exports = {Todo};
+exports.default = mongoose_1.model('Todo', todoSchema);
